@@ -40,11 +40,13 @@ class Embedding(nn.Embedding, LoRALayer):
         merge_weights: bool = True,
         **kwargs
     ):
+        # 多继承
         nn.Embedding.__init__(self, num_embeddings, embedding_dim, **kwargs)
         LoRALayer.__init__(self, r=r, lora_alpha=lora_alpha, lora_dropout=0,
                            merge_weights=merge_weights)
         # Actual trainable parameters
         if r > 0:
+            # A,B权重矩阵
             self.lora_A = nn.Parameter(self.weight.new_zeros((r, num_embeddings)))
             self.lora_B = nn.Parameter(self.weight.new_zeros((embedding_dim, r)))
             self.scaling = self.lora_alpha / self.r
