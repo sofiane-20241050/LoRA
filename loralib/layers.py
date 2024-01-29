@@ -17,14 +17,14 @@ class LoRALayer():
         lora_dropout: float,
         merge_weights: bool,
     ):
-        self.r = r
-        self.lora_alpha = lora_alpha
+        self.r = r  # 低秩
+        self.lora_alpha = lora_alpha  # 量化(scale)更新梯度的系数
         # Optional dropout
         if lora_dropout > 0.:
             self.lora_dropout = nn.Dropout(p=lora_dropout)
         else:
             self.lora_dropout = lambda x: x
-        # Mark the weight as unmerged
+        # Mark the weight as unmerged 
         self.merged = False
         self.merge_weights = merge_weights
 
