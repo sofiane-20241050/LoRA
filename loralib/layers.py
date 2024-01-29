@@ -25,7 +25,7 @@ class LoRALayer():
         else:
             self.lora_dropout = lambda x: x
         # Mark the weight as unmerged 
-        self.merged = False
+        self.merged = False  # 没有merge指的是deltaW这部分更新梯度并没有加和到原权重矩阵中去，是分离的
         self.merge_weights = merge_weights
 
 
