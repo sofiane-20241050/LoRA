@@ -47,6 +47,7 @@ class Embedding(nn.Embedding, LoRALayer):
         # Actual trainable parameters
         if r > 0:
             # A,B权重矩阵
+            # new_zeros函数第一个参数为size,与前面张量保持同样的torch.dtype与torch.device
             self.lora_A = nn.Parameter(self.weight.new_zeros((r, num_embeddings)))
             self.lora_B = nn.Parameter(self.weight.new_zeros((embedding_dim, r)))
             self.scaling = self.lora_alpha / self.r
